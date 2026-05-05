@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { NAV_LINKS, FOOTER_SECTIONS, PROGRAMS, NAV_FEATURES, NAV_RESOURCES, NAV_COMPANY, NAV_CONTACT } from '@/lib/content';
+import { NAV_LINKS, PROGRAMS, NAV_FEATURES, NAV_RESOURCES, NAV_COMPANY, NAV_CONTACT } from '@/lib/content';
 import HeroButton from '@/components/shared/HeroButton';
 
 // ─── Typography tokens ────────────────────────────────────────────────────────
@@ -118,6 +118,18 @@ function CompanyDropdown({ items }: { items: { title: string; href: string }[] }
       ))}
     </div>
   );
+}
+
+// ─── Mobile sub-items (mirrors desktop dropdowns) ─────────────────────────────
+type MobileSubItem = { label: string; href: string };
+
+function getMobileSubItems(label: string): MobileSubItem[] {
+  if (label === 'Program')    return PROGRAMS.map(p => ({ label: p.name, href: '#programs' }));
+  if (label === 'Features')   return NAV_FEATURES.map(f => ({ label: f.title, href: '#tools' }));
+  if (label === 'Resources')  return NAV_RESOURCES.map(r => ({ label: r.title, href: '#' }));
+  if (label === 'Company')    return NAV_COMPANY.map(c => ({ label: c.title, href: c.href }));
+  if (label === 'Contact Us') return NAV_CONTACT.map(c => ({ label: c.title, href: c.href }));
+  return [];
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────
@@ -242,21 +254,21 @@ export default function Header() {
           <nav aria-label="Mobile navigation">
             <ul className="space-y-0.5 mb-4">
               {NAV_LINKS.map((link) => {
-                const section = FOOTER_SECTIONS.find(s => s.title === link.label);
+                const subItems = getMobileSubItems(link.label);
                 const expanded = mobileExpanded === link.label;
                 return (
                   <li key={link.label}>
                     <button
                       className="w-full flex items-center justify-between px-3 py-3 rounded-xl transition-colors hover:bg-[#F8F7F4]"
                       style={{ ...NAV_ITEM_BASE, color: 'rgb(27,28,27)' }}
-                      onClick={() => section ? setMobileExpanded(expanded ? null : link.label) : setMobileOpen(false)}
+                      onClick={() => subItems.length > 0 ? setMobileExpanded(expanded ? null : link.label) : setMobileOpen(false)}
                     >
                       {link.label}
-                      {section && <ChevronDownIcon rotated={expanded} />}
+                      {subItems.length > 0 && <ChevronDownIcon rotated={expanded} />}
                     </button>
-                    {section && expanded && (
+                    {subItems.length > 0 && expanded && (
                       <ul className="ml-4 mb-1 space-y-0.5">
-                        {section.links.map((item) => (
+                        {subItems.map((item) => (
                           <li key={item.label}>
                             <a
                               href={item.href}
@@ -274,9 +286,12 @@ export default function Header() {
                 );
               })}
             </ul>
-            <div className="flex items-center gap-3 pt-3 border-t border-[rgba(0,0,0,0.06)]">
-              <HeroButton href="#" dark>Login</HeroButton>
-              <button className="inline-flex items-center gap-1.5 px-3 py-2.5 hover:bg-[#F5F5F4] rounded-xl transition-colors" style={{ ...NAV_ITEM_BASE, color: 'rgb(27,28,27)' }}>
+            <div className="flex items-center justify-between pt-3 border-t border-[rgba(0,0,0,0.06)]">
+              <HeroButton href="#" dark sm>Login</HeroButton>
+              <button
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-[#F5F5F4] transition-colors"
+                style={{ ...NAV_ITEM_BASE, color: 'rgb(27,28,27)' }}
+              >
                 <GlobeIcon />
                 <span>EN</span>
                 <ChevronDownIcon />
