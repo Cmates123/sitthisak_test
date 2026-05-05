@@ -1,5 +1,5 @@
 import type { Tool } from '@/types/content';
-import { Target, Globe, Cloud, Share2 } from 'lucide-react';
+import { Target, Globe, Cloud, Sparkle } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 import { cn } from '@/lib/utils';
 
@@ -7,7 +7,7 @@ const ICONS: Record<Tool['id'], React.ReactNode> = {
   'create-mission':      <Target className="w-6 h-6 text-[#2563EB]" strokeWidth={1.5} />,
   'explore-marketplace': <Globe  className="w-6 h-6 text-[#2563EB]" strokeWidth={1.5} />,
   'earn-credentials':    <Cloud  className="w-6 h-6 text-[#2563EB]" strokeWidth={1.5} />,
-  'share-impact':        <Share2 className="w-6 h-6 text-[#2563EB]" strokeWidth={1.5} />,
+  'share-impact':        <Sparkle className="w-6 h-6 text-[#2563EB]" strokeWidth={1.5} />,
 };
 
 export default function ToolCard({ tool }: { tool: Tool }) {

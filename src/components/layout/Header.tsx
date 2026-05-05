@@ -43,11 +43,13 @@ function cellBorder(i: number, total: number, cols = 2) {
 // ─── Small SVG icons ──────────────────────────────────────────────────────────
 function HexagonLogo() {
   return (
-    <svg width="26" height="26" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-      <path d="M15 2.5L26.3 8.75V21.25L15 27.5L3.7 21.25V8.75L15 2.5Z" fill="rgb(60,57,54)" />
-      <path d="M15 7.5L22.5 11.875V20.625L15 25L7.5 20.625V11.875L15 7.5Z" fill="white" fillOpacity="0.22" />
-      <path d="M15 11L19.5 13.625V18.875L15 21.5L10.5 18.875V13.625L15 11Z" fill="white" fillOpacity="0.35" />
-    </svg>
+    <img
+      src="/Screenshot_2569-05-06_at_04.21.11-removebg-preview.png"
+      alt="Medalverse logo"
+      width={28}
+      height={28}
+      style={{ objectFit: 'contain' }}
+    />
   );
 }
 

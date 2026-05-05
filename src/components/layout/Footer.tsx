@@ -16,7 +16,16 @@ export default function Footer() {
       <div className="space-y-12">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <div className="mb-4 font-display font-bold text-lg uppercase tracking-[0.24em]">medalverse</div>
+            <div className="mb-4 flex items-center gap-2">
+              <img
+                src="/Screenshot_2569-05-06_at_04.21.11-removebg-preview.png"
+                alt="Medalverse logo"
+                width={22}
+                height={22}
+                style={{ objectFit: 'contain' }}
+              />
+              <span className="lowercase" style={{ fontFamily: "'Chillax', ui-sans-serif, system-ui, sans-serif", fontWeight: 500, fontSize: '22.86px', color: 'rgb(60,57,54)', letterSpacing: '-0.01em', lineHeight: 1 }}>medalverse</span>
+            </div>
             <p className="text-sm text-[#6B7280] leading-relaxed max-w-[18rem]">
               Meldalverse is an end-to-end admissions platform helping students get accepted through real mentors, proven insider strategies, and verified achievements — all in one place.
             </p>
