@@ -136,11 +136,12 @@ function getMobileSubItems(label: string): MobileSubItem[] {
 const NAV_DROPDOWN_KEYS = new Set(['Program', 'Features', 'Solutions', 'Resources', 'Company', 'Contact Us']);
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen]       = useState(false);
-  const [openDropdown, setOpenDropdown]   = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen]         = useState(false);
+  const [openDropdown, setOpenDropdown]     = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [langOpen, setLangOpen]           = useState(false);
-  const [lang, setLang]                   = useState<'EN' | 'TH'>('EN');
+  const [langOpen, setLangOpen]             = useState(false);
+  const [mobileLangOpen, setMobileLangOpen] = useState(false);
+  const [lang, setLang]                     = useState<'EN' | 'TH'>('EN');
 
   function getDropdownContent(key: string) {
     if (key === 'Program')    return <ProgramDropdown />;
@@ -288,14 +289,31 @@ export default function Header() {
             </ul>
             <div className="flex items-center justify-between pt-3 border-t border-[rgba(0,0,0,0.06)]">
               <HeroButton href="#" dark sm>Login</HeroButton>
-              <button
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-[#F5F5F4] transition-colors"
-                style={{ ...NAV_ITEM_BASE, color: 'rgb(27,28,27)' }}
-              >
-                <GlobeIcon />
-                <span>EN</span>
-                <ChevronDownIcon />
-              </button>
+              <div className="relative">
+                <button
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl hover:bg-[#F5F5F4] transition-colors"
+                  style={{ ...NAV_ITEM_BASE, color: 'rgb(27,28,27)' }}
+                  onClick={() => setMobileLangOpen(v => !v)}
+                >
+                  <GlobeIcon />
+                  <span>{lang}</span>
+                  <ChevronDownIcon rotated={mobileLangOpen} />
+                </button>
+                {mobileLangOpen && (
+                  <div className="absolute bottom-full right-0 mb-2 bg-white border border-[rgba(0,0,0,0.07)] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] overflow-hidden" style={{ minWidth: '160px' }}>
+                    {(['EN', 'TH'] as const).map((value, i) => (
+                      <button
+                        key={value}
+                        onClick={() => { setLang(value); setMobileLangOpen(false); }}
+                        className="w-full text-left px-6 py-4 hover:bg-[#F8F8F7] transition-colors"
+                        style={{ fontFamily: FONT_SANS, fontWeight: 500, fontSize: '15px', color: 'rgb(17,17,17)', letterSpacing: '-0.02em', borderBottom: i === 0 ? '1px solid rgba(0,0,0,0.06)' : 'none' }}
+                      >
+                        {value === 'EN' ? 'English (EN)' : 'Thai (TH)'}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </nav>
         </div>
