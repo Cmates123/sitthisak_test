@@ -1,13 +1,13 @@
 import { FOOTER, FOOTER_SECTIONS } from '@/lib/content';
-import { Globe, Mail, MessageCircle, SquareStar, Heart } from 'lucide-react';
 
 const SOCIAL_LINKS = [
-  { label: 'Line', icon: null, href: '#' },
-  { label: 'Website', icon: <Globe className="w-4 h-4" />, href: '#' },
-  { label: 'Email', icon: <Mail className="w-4 h-4" />, href: '#' },
-  { label: 'Chat', icon: <MessageCircle className="w-4 h-4" />, href: '#' },
-  { label: 'Highlights', icon: <SquareStar className="w-4 h-4" />, href: '#' },
-  { label: 'Favorites', icon: <Heart className="w-4 h-4" />, href: '#' },
+  { label: 'Line',      src: '/line.png',     href: '#' },
+  { label: 'Facebook',  src: '/facebook.png',  href: '#' },
+  { label: 'X',         src: '/x.png',         href: '#' },
+  { label: 'YouTube',   src: '/youtube.png',   href: '#' },
+  { label: 'Discord',   src: '/discord.png',   href: '#' },
+  { label: 'TikTok',    src: '/tiktok.png',    href: '#' },
+  { label: 'Instagram', src: '/ig.png',        href: '#' },
 ];
 
 export default function Footer() {
@@ -53,8 +53,8 @@ export default function Footer() {
           <div className="text-sm text-[#6B7280]">{FOOTER.legal}</div>
           <div className="flex flex-wrap items-center gap-4 text-[#6B7280]">
             {SOCIAL_LINKS.map((social) => (
-              <a key={social.label} href={social.href} aria-label={social.label} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#6B7280] transition hover:border-[#111111] hover:text-[#111111]">
-                {social.icon ?? social.label.charAt(0)}
+              <a key={social.label} href={social.href} aria-label={social.label} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#E5E7EB] bg-white transition hover:border-[#111111]">
+                <img src={social.src} alt={social.label} width={28} height={28} style={{ objectFit: 'contain' }} />
               </a>
             ))}
           </div>
